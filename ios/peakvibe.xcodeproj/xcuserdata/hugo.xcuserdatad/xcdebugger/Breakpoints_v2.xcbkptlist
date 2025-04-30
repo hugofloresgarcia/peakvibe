@@ -52,7 +52,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "78EEAB26-6498-4C7F-80C7-9F9439324683 - e1446cc5391dd0ee"
+                  uuid = "78EEAB26-6498-4C7F-80C7-9F9439324683 - daf55b18397d18e1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -63,11 +63,10 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "96">
+                  endingLineNumber = "62">
                </Location>
                <Location
-                  uuid = "78EEAB26-6498-4C7F-80C7-9F9439324683 - e1446cc5391dd0ee"
+                  uuid = "78EEAB26-6498-4C7F-80C7-9F9439324683 - daf55b18397d18e1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -78,8 +77,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "316">
+                  endingLineNumber = "62">
                </Location>
             </Locations>
          </BreakpointContent>
