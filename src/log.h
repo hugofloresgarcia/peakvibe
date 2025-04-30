@@ -14,7 +14,7 @@ using spdlog::warn;
 #define LOG_LEVEL spdlog::level::debug
 #define LOG_FLUSH_INTERVAL std::chrono::seconds(1)
 
-inline void kiwi_logger_init(const std::string& path) {
+inline void peakvibe_logger_init(const std::string& path) {
     try 
     {
         spdlog::details::os::remove_if_exists(path);

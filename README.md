@@ -1,7 +1,7 @@
 ## usage
 
 ```bash
-git clone --recursive https://github.com/hugofloresgarcia/kiwi-reaper.git
+git clone --recursive https://github.com/hugofloresgarcia/peakvibe.git
 ```
 
 ## building

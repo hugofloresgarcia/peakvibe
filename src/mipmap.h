@@ -56,7 +56,7 @@ public:
 
         std::string resource_path = GetResourcePath();
         std::ofstream ofs;
-        ofs.open(resource_path + "/kiwi-mipmap.json");
+        ofs.open(resource_path + "/peakvibe-mipmap.json");
 
         if (!ofs.is_open()){
             return false;

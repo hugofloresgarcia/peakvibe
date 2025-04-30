@@ -27,15 +27,15 @@ static int RECV_PORT = 8001;
 int CONNECTION_ACTION_ID;
 osc_controller_t *controller;
 
-static bool kiwi_connection_status(int commandId, int flag)
+static bool peakvibe_connection_status(int commandId, int flag)
 {
 	if (commandId == CONNECTION_ACTION_ID) {
     bool connection_status = controller->get_connection_status();
 
     if (connection_status)  
-      ShowConsoleMsg("Kiwi Haptic Interface is connected.");
+      ShowConsoleMsg("peakvibe Haptic Interface is connected.");
     else 
-      ShowConsoleMsg("Kiwi Haptic Interface is not connected.");
+      ShowConsoleMsg("peakvibe Haptic Interface is not connected.");
       
 		return true;
 	}
@@ -59,7 +59,7 @@ std::string get_ip_address(const std::string& resource_path) {
   size_t addrsize = 16;
   std::string addr(addrsize, ' ');
   // load cached ip address (if it exists)
-  std::string ip_address_cache_file = resource_path + "/kiwi-ip.json";
+  std::string ip_address_cache_file = resource_path + "/peakvibe-ip.json";
   std::ifstream ip_cache_ifs(ip_address_cache_file);
   if (ip_cache_ifs.is_open()) {
     info("found cached ip address");
@@ -71,13 +71,13 @@ std::string get_ip_address(const std::string& resource_path) {
 
   
 
-  if (!GetUserInputs("kiwi setup", 1, "Enter iPhone IP address: ", addr.data(), addr.size())) {
-    ShowConsoleMsg("kiwi: failed to get IP address");
+  if (!GetUserInputs("peakvibe setup", 1, "Enter iPhone IP address: ", addr.data(), addr.size())) {
+    ShowConsoleMsg("peakvibe: failed to get IP address");
     return "";
   }
 
   // // tell the user what the ip address is
-  // std::string msg = std::string("kiwi: REAPER IP address ") + get_local_IP();
+  // std::string msg = std::string("peakvibe: REAPER IP address ") + get_local_IP();
   // ShowConsoleMsg(msg.c_str());
 
   // clean the IP address string
@@ -85,7 +85,7 @@ std::string get_ip_address(const std::string& resource_path) {
   // remove whitespace
   addr = trim(addr, " ");
   if (!validateIP(addr)) {
-    ShowConsoleMsg("kiwi: invalid IP address");
+    ShowConsoleMsg("peakvibe: invalid IP address");
     return "";
   }
 
@@ -161,21 +161,21 @@ extern "C" REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(
 
   // create log file
   std::string resource_path = GetResourcePath();
-  std::string log_path = resource_path + "/kiwi-log.txt";
-  kiwi_logger_init(log_path);
+  std::string log_path = resource_path + "/peakvibe-log.txt";
+  peakvibe_logger_init(log_path);
 
   // print our log path and resource path
-  info("kiwi: log path: %s", log_path.c_str());
-  info("kiwi: resource path: %s", resource_path.c_str());
+  info("peakvibe: log path: %s", log_path.c_str());
+  info("peakvibe: resource path: %s", resource_path.c_str());
 
 
   // check if we have permission to write to the resource path
   // try opening a new file in the resource path
 
-  std::string test_file_path = resource_path + "/kiwi-test.txt";
+  std::string test_file_path = resource_path + "/peakvibe-test.txt";
   std::ofstream test_file(test_file_path);
   if (!test_file.is_open()) {
-    ShowConsoleMsg("kiwi: failed to open test file in resource path. Please check permissions");
+    ShowConsoleMsg("peakvibe: failed to open test file in resource path. Please check permissions");
   }
 
 
@@ -183,23 +183,23 @@ extern "C" REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(
 
   std::string ADDRESS = get_ip_address(resource_path);
 
-  // register kiwi connection action
-  CONNECTION_ACTION_ID = rec->Register("command_id", (void*)"KiwiConnectionStatus");
+  // register peakvibe connection action
+  CONNECTION_ACTION_ID = rec->Register("command_id", (void*)"peakvibeConnectionStatus");
   gaccel_register_t accelerator;
   accelerator.accel.fVirt = 0;
   accelerator.accel.key = 0;
   accelerator.accel.cmd = CONNECTION_ACTION_ID;
-  accelerator.desc = "Check connection status of kiwi haptic interface";
+  accelerator.desc = "Check connection status of peakvibe haptic interface";
   if (!rec->Register("gaccel", &accelerator)) 
     return 0;
 
-  if (!rec->Register("hookcommand", (void *)&kiwi_connection_status)) 
+  if (!rec->Register("hookcommand", (void *)&peakvibe_connection_status)) 
     return 0;
 
   // create controller
   controller = new osc_controller_t(ADDRESS, SEND_PORT, RECV_PORT);
   if (!controller->init()) {
-    ShowConsoleMsg("kiwi: failed to initialize OSC controller. OSC Connection failed\n");
+    ShowConsoleMsg("peakvibe: failed to initialize OSC controller. OSC Connection failed\n");
     return 0;
   }
   // register action hooks

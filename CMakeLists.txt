@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # set project name and version
-project(kiwi VERSION 0.0.1)
+project(peakvibe VERSION 0.0.1)
 
 # need FindWDL
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -37,9 +37,9 @@ endif()
 # lower architecture name
 STRING(TOLOWER "${ARCH_NAME}" ARCH_NAME)
 
-set(CMAKE_INSTALL_DEFAULT_COMPONENT_NAME kiwi) # avoid an empty "Unspecified" component
+set(CMAKE_INSTALL_DEFAULT_COMPONENT_NAME peakvibe) # avoid an empty "Unspecified" component
 
-add_library(kiwi SHARED
+add_library(peakvibe SHARED
     include/oscpkt/oscpkt.hh
     include/oscpkt/udp.hh
     include/json/json.hpp
@@ -56,7 +56,7 @@ add_library(kiwi SHARED
     src/osc.h
 )
   
-target_include_directories(kiwi PRIVATE
+target_include_directories(peakvibe PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/include/spdlog
   ${CMAKE_CURRENT_SOURCE_DIR}/vendor
@@ -68,10 +68,10 @@ target_include_directories(kiwi PRIVATE
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/wdl)
 find_package(WDL REQUIRED)
 
-target_link_libraries(kiwi WDL::WDL)
-set_target_properties(kiwi PROPERTIES
+target_link_libraries(peakvibe WDL::WDL)
+set_target_properties(peakvibe PROPERTIES
   PREFIX "" # disable the "lib" prefix
-  OUTPUT_NAME "reaper_kiwi-${ARCH_NAME}"
+  OUTPUT_NAME "reaper_peakvibe-${ARCH_NAME}"
 )
 
 set(REAPER_USER_PLUGINS "UserPlugins")
@@ -83,8 +83,8 @@ if(NO_INSTALL_PREFIX)
   set(REAPER_SCRIPTS      ".")
 endif()
 
-install(TARGETS kiwi
-  COMPONENT kiwi
+install(TARGETS peakvibe
+  COMPONENT peakvibe
   RUNTIME DESTINATION "${REAPER_USER_PLUGINS}" # Windows .dll
   LIBRARY DESTINATION "${REAPER_USER_PLUGINS}" # macOS .dylib/Linux .so
 )
